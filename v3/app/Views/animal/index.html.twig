@@ -1,0 +1,40 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Liste des Animaux{% endblock %}
+
+{% block content %}
+    <h1 class="text-2xl font-bold mb-4">Liste des animaux</h1>
+
+    <a href="?controller=animal&action=ajouterAnimal" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 mb-4 inline-block">Ajouter un animal</a>
+
+    <table class="table-auto border-collapse border border-gray-300 w-full bg-white shadow-md rounded-lg">
+        <thead class="bg-gray-100">
+        <tr>
+            <th class="border border-gray-300 px-4 py-2">ID</th>
+            <th class="border border-gray-300 px-4 py-2">Type</th>
+            <th class="border border-gray-300 px-4 py-2">Âge</th>
+            <th class="border border-gray-300 px-4 py-2">Santé</th>
+            <th class="border border-gray-300 px-4 py-2">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for animal in animals %}
+            <tr class="hover:bg-gray-50">
+                <td class="border border-gray-300 px-4 py-2" align="center">{{ animal.id }}</td>
+                <td class="border border-gray-300 px-4 py-2" align="center">{{ animal.type }}</td>
+                <td class="border border-gray-300 px-4 py-2" align="center">{{ animal.age }}</td>
+                <td class="border border-gray-300 px-4 py-2" align="center">{{ animal.sante }}</td>
+                <td class="border border-gray-300 px-4 py-2 space-x-2" align="center">
+                    <a href="?controller=animal&action=listAnimalParId&id={{ animal.id }}"
+                       class="text-blue-500 hover:underline">Détails</a>
+                    <a href="?controller=animal&action=modifierAnimal&id={{ animal.id }}"
+                       class="text-green-500 hover:underline">Éditer</a>
+                    <a href="?controller=animal&action=supprimerAnimal&id={{ animal.id }}"
+                       class="text-red-500 hover:underline">Supprimer</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
